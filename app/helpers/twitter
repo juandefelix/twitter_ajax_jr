@@ -1,0 +1,7 @@
+def get_10_tweets_from(user)
+  CLIENT.user_timeline(user, {:count => 10})
+end
+
+def print_ten_tweets_from(user)
+  get_10_tweets_from(user).each_with_index { |tweet, i| puts; puts "#{i+1}. #{tweet.full_text}"; puts}
+end

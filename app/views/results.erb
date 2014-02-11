@@ -1,0 +1,30 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<h1  id='user-name' data-user-name="<%=@name%>"> Tweets for <%= @name%> </h1>
+<div class='waiting'>
+  <h1> Please, wait </h1>
+
+  <img src="/13920850905.gif">
+  <ul>
+  </ul>
+</div>
+
+
+<script>
+$(document).ready(function(){
+  $.ajax({
+    url: '/gettweets',
+    method: 'post',
+    data: ({userName: $("#user-name").data("user-name")}),
+    dataType: 'json',
+    success: function(response){
+      $('img').remove();
+      $('.waiting h1').remove();
+      for (var i = response.length - 1; i >= 0; i--) {
+        text = '<li>' + response[i].text + '</li>';
+        $('.waiting ul').append(text)
+      };
+    }// end success
+  })  //end ajax
+})
+</script>
